@@ -9,7 +9,7 @@
     "url": "https://www.tranmere-web.com"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/chrisowen491"
   },
   "files": [
     "generators"
