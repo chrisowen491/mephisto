@@ -1,0 +1,43 @@
+{
+  "name": "<%= projectName %>",
+  "version": "<%= initialVersion %>",
+  "description": "<%= description %>",
+  "bin": {
+    "<%= stackName %>": "bin/<%= stackName %>.ts"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "cdk": "cdk",
+    "test": "jest",
+    "buildTemplate": "cdk synth --no-staging > template.yaml",
+    "buildlambdas": "npm run build && sam build -m ./package.json",
+    "start-api": "sam local start-api",
+    "local": "npm run buildTemplate && npm run buildlambdas && npm run start-api" 
+  },
+  "vertical": "<%= vertical %>", 
+  "author": "<%= author %>",
+  "files": [
+    "/build/*.js"
+  ],
+  "devDependencies": {
+    "@aws-cdk/assert": "1.89.0",
+    "@types/jest": "^26.0.10",
+    "@types/node": "10.17.27",
+    "@types/aws-lambda": "^8.10.72",
+    "@types/chai": "^4.2.15",
+    "jest": "^26.4.2",
+    "ts-jest": "^26.2.0",
+    "aws-cdk": "1.89.0",
+    "ts-node": "^9.0.0",
+    "typescript": "~3.9.7",
+    "@aws-cdk/aws-apigateway": "^1.89.0",
+    "@aws-cdk/aws-lambda": "^1.89.0",
+    "@aws-cdk/core": "1.89.0",
+    "@aws-cdk/custom-resources": "^1.89.0"
+  },
+  "dependencies": {
+    "aws-xray-sdk": "^3.2.0",
+    "aws-sdk": "^2.190.0"
+  }
+}

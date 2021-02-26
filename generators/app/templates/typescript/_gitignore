@@ -1,0 +1,12 @@
+node_modules
+build
+lib/*.js
+bin/*.js
+
+template.yaml
+src/*.js
+.aws-sam
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out

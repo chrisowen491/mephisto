@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Chris Owen",
+      "authorEmail": "chris.owen@moneysupermarket.com",
+      "authorUrl": ""
+    }
+  }
+}
