@@ -9,8 +9,8 @@
     "url": "https://www.tranmere-web.com"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  }, 
+    "registry": "https://npm.pkg.github.com"
+  },
   "files": [
     "generators"
   ],
@@ -41,7 +41,8 @@
     "yosay": "^2.0.1"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "roots": ["<rootDir>/__tests__"]
   },
   "lint-staged": {
     "*.js": [
