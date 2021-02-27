@@ -5,6 +5,8 @@ on:
 jobs:
   run-npm-test:
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: npm install, and test
