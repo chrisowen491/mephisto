@@ -16,13 +16,7 @@ jobs:
           git config --global user.name '${{ github.repository }}/actions'
           git config --global user.email '<>'     
       - name: Bump version
-        run: npm version patch  
-      - name: Setup GitHub Credentials
-        continue-on-error: true
-        run: |
-          git add *;
-          git commit -m "Commit message"       
-          git push
+        run: npm version minor --force -m "Some message to commit"
       - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
