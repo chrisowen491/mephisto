@@ -16,7 +16,7 @@ jobs:
           git config --global user.name '${{ github.repository }}/actions'
           git config --global user.email '<>'     
       - name: Bump version
-        run: npm version minor --force -m "Some message to commit"
+        run: npm version minor --force -m "Bumping Version"
       - name: Push Change
         run: git push       
       - uses: actions/setup-node@v2
