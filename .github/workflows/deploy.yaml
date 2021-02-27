@@ -17,6 +17,8 @@ jobs:
           git config --global user.email '<>'     
       - name: Bump version
         run: npm version minor --force -m "Some message to commit"
+      - name: Push Change
+        run: git push       
       - uses: actions/setup-node@v2
         with:
           node-version: '12.x'
