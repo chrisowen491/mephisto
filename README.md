@@ -1,5 +1,5 @@
 # generator-mephisto [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> A MSM template for building a web accesible lambda that runs in the MSM VPC and can access other group services
+> A  template for building a web accesible lambda that runs in a VPC and can access other group services
 
 ## Installation
 
