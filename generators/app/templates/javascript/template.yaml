@@ -14,14 +14,16 @@ Parameters:
     Default: Canary10Percent5Minutes
   S3BucketName:
     Type: String
-  SwaggerFile:
+  OpenAPIFile:
     Type: String
-    Default: swagger.yaml
+    Default: openapi.yaml
   EnvName:
     Type: String
     Default: sit1
     Description: The name of the environment to deploy to
     AllowedValues:
+      - local
+      - ci1      
       - sit1
       - pre1
       - prod1
@@ -30,6 +32,10 @@ Parameters:
 # to the template can define envioronment specific variables 
 Mappings:
   SpecialFeature1:
+    local:
+      answer: 1
+    ci1:
+      answer: 1    
     sit1:
       answer: 1      
     pre1:
@@ -46,49 +52,17 @@ Resources:
         AllowOrigin: "'*'"
       StageName: Prod
       Name: <%= stackName %>
-      GatewayResponses:
-        UNAUTHORIZED:
-          StatusCode: 401
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-        ACCESS_DENIED:
-          StatusCode: 403
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-        INVALID_API_KEY:
-          StatusCode: 200
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-              Access-Control-Allow-Headers: "'x-api-key,content-type'"
-        MISSING_AUTHENTICATION_TOKEN:
-          StatusCode: 403
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-        DEFAULT_5XX:
-          StatusCode: 500
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-        RESOURCE_NOT_FOUND:
-          StatusCode: 404
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
       DefinitionBody:
         Fn::Transform:
           Name: AWS::Include
           Parameters:
-            Location:
+            Location: 
               Fn::Join:
-                - ''
-                - - 's3://'
-                  - Ref: S3BucketName
-                  - '/'
-                  - Ref: SwaggerFile
+              - ''
+              - - s3://
+                - Ref: S3BucketName
+                - /
+                - Ref: OpenAPIFile
 
   <%= lambdaName %>:
     Type: AWS::Serverless::Function
