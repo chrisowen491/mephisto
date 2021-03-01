@@ -26,6 +26,7 @@ jobs:
           scope: '@chrisowen491'
       - run: npm install
       - run: npm publish
+      
       - name: Push Change
         run: git push    
       - name: Bump version and push tag
