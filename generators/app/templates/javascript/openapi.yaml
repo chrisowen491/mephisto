@@ -21,6 +21,50 @@ paths:
             statusCode: "200"
         uri:
           Fn::Sub: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${<%= lambdaName %>.Arn}/invocations
+
+x-amazon-apigateway-cors:
+  allowOrigins:
+    - '*'
+  allowMethods:
+    - GET
+    - OPTIONS
+    - POST
+  allowHeaders:
+    - x-amzm-header
+    - x-apigateway-header
+    - x-api-key
+    - authorization
+    - x-amz-date
+    - content-type
+    
+x-amazon-apigateway-gateway-responses:
+  ACCESS_DENIED:
+    statusCode: 403
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+  UNAUTHORIZED:
+    statusCode: 401
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+  DEFAULT_5XX:
+    statusCode: 500
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+  MISSING_AUTHENTICATION_TOKEN:
+    statusCode: 403
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+  INVALID_API_KEY:
+    statusCode: 200
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+      gatewayresponse.header.Access-Control-Allow-Headers: "'x-api-key,content-type'"
+  RESOURCE_NOT_FOUND:
+    statusCode: 404
+    responseParameters:
+      gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+
+
 components:
   schemas:
     Message:
