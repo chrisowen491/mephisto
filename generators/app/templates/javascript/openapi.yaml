@@ -22,6 +22,7 @@ paths:
         uri:
           Fn::Sub: arn:${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${<%= lambdaName %>.Arn}/invocations
 
+
 x-amazon-apigateway-cors:
   allowOrigins:
     - '*'
