@@ -33,7 +33,15 @@
 					],
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							<% if (auth) { %>
+								{
+									"key": "x-api-key",
+									"value": "{{testApiKey}}",
+									"type": "text"
+								}
+						  	<% } %>
+						],
 						"url": {
 							"raw": "{{protocol}}://{{domain}}/{{basePath}}",
 							"protocol": "{{protocol}}",

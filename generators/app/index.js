@@ -88,6 +88,21 @@ module.exports = class extends Generator {
         default: "tranmere-web.com"
       },
       {
+        type: "confirm",
+        name: "auth",
+        message: "Would you like API Key Authentication?"
+      },
+      {
+        type: "confirm",
+        name: "includeUnitTest",
+        message: "Do you want to include unit tests for your lambda?"
+      },
+      {
+        type: "confirm",
+        name: "includeSecurityScan",
+        message: "Do you want to include a security scan with Zap?"
+      },
+      {
         type: "input",
         name: "uriStem",
         message: `What is the uri stem for the lambda(s) e.g. http://some-domain/${this.appname.replace(

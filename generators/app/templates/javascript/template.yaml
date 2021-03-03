@@ -52,6 +52,10 @@ Resources:
         AllowOrigin: "'*'"
       StageName: Prod
       Name: <%= stackName %>
+<% if (auth) { %>
+      Auth:
+        ApiKeyRequired: true
+<% } %>
       DefinitionBody:
         Fn::Transform:
           Name: AWS::Include

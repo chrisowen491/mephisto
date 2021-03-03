@@ -20,6 +20,7 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+<% if (includeUnitTest) { %>
       - name: Unit Test
         run: npm run test
       - name: Archive Coverage Report
@@ -27,6 +28,7 @@ jobs:
         with:
           name: coverage
           path: coverage/*  
+<% } %>        
       - name: Configure AWS credentials
         id: creds
         uses: aws-actions/configure-aws-credentials@v1
@@ -92,8 +94,9 @@ jobs:
           name: sam-template 
       - name: Post Deploy Checks
         run: 
-          npm install newman && node ./node_modules/newman/bin/newman run ./api_tests/postman-collection.json -e ./api_tests/env/aws-$ENV_NAME.json 
+          npm install newman && node ./node_modules/newman/bin/newman run ./api_tests/postman-collection.json -e ./api_tests/env/aws-$ENV_NAME.json <% if (auth) { %>--env-var "testApiKey=${{ secrets.API_KEY }}"<% } %>
 
+<% if (includeSecurityScan) { %>
   zap_scan:
     runs-on: ubuntu-latest
     name: Scan the webapplication
@@ -103,4 +106,5 @@ jobs:
         uses: zaproxy/action-baseline@v0.4.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          target: https://api.ci1.<%= baseDomain %>/<%= uriStem %>/        
+          target: https://api.ci1.<%= baseDomain %>/<%= uriStem %>/   
+<% } %>       

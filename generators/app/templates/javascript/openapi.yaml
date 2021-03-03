@@ -6,6 +6,10 @@ info:
 paths:
   /:
     get:
+<% if (auth) { %>
+      security:
+      - APIKeyHeader: [] 
+<% } %>         
       responses:
         200:
           description: "OK"
@@ -72,4 +76,11 @@ components:
       type: object
       properties:
         message:
-          type: string 
+          type: string
+<% if (auth) { %>
+  securitySchemes:
+    APIKeyHeader:
+      type: apiKey
+      name: x-api-Key
+      in: header   
+<% } %>           
